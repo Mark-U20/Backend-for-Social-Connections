@@ -1,6 +1,13 @@
+
+
+### Get all users
+
 GET http://localhost:3001/api/users
 
-### Create a group
+### get user by id and populated thought and friend data
+GET http://localhost:3001/api/users/62fd795706272aa5b79a12ae
+
+### Create/post a User
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
@@ -8,6 +15,25 @@ Content-Type: application/json
   "username": "lernantino",
   "email": "lernantino@gmail.com"
 }
+###update a user by its _id
+PUT http://localhost:3001/api/users/62fd795706272aa5b79a12ae
+Content-Type: application/json
+
+{
+  "username": "lernantino2",
+  "email": "lernantino@gmail.com"
+}
+
+### delete a user by its _id
+
+DELETE http://localhost:3001/api/users/62fd795706272aa5b79a12ae
+
+
+
+
+### get all thoughts
+
+GET http://localhost:3001/api/thoughts
 
 ### Add student to a group
 

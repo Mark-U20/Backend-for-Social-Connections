@@ -19,10 +19,13 @@ const{
 //user routes
 
 router.route('/users').get(getUsers).
-get(getUserById).
-put(updateUser).
-post(createNewUser).
-delete(removeUser);
+post(createNewUser)
+
+//get user by id
+router.route('/users/:userId').get(getUserById).
+delete(removeUser)
+.put(updateUser);
+;
 
 //friend routes
 
