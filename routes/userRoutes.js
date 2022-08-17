@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const User = require('../models/user');
 const{
     getUsers,
     getUserById,
@@ -42,5 +41,5 @@ router.route('/thoughts').get(getThoughts)
 router.route('/thoughts/:thoughtId/reactions').post(addReaction)
 .delete(removeReaction);
 
-
+module.exports = router;
 

@@ -1,11 +1,12 @@
-GET https://mongoose-playground-testing.herokuapp.com/api/groups
+GET http://localhost:3001/api/users
 
 ### Create a group
-POST https://mongoose-playground-testing.herokuapp.com/api/groups
+POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "group_name": "team garf"
+  "username": "lernantino",
+  "email": "lernantino@gmail.com"
 }
 
 ### Add student to a group
