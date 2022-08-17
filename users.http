@@ -1,0 +1,30 @@
+GET https://mongoose-playground-testing.herokuapp.com/api/groups
+
+### Create a group
+POST https://mongoose-playground-testing.herokuapp.com/api/groups
+Content-Type: application/json
+
+{
+  "group_name": "team garf"
+}
+
+### Add student to a group
+
+POST https://mongoose-playground-testing.herokuapp.com/api/students/
+Content-Type: application/json
+
+{
+  "group_id": "62fd0d7f8e7b2c4c319bba4c",
+  "first": "test",
+  "last": "test123123"
+}
+
+###
+
+DELETE http://localhost:3001/api/students/
+Content-Type: application/json
+
+{
+  "group_id": "62fab3ae7195131226d24df2",
+  "student_id": "62fab3e07195131226d24df5"
+}
