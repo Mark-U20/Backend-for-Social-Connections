@@ -5,15 +5,15 @@
 GET http://localhost:3001/api/users
 
 ### get user by id and populated thought and friend data
-GET http://localhost:3001/api/users/62fd795706272aa5b79a12ae
+GET http://localhost:3001/api/users/62fd80b11d68443cd37f8845
 
 ### Create/post a User
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
+  "username": "friend",
+  "email": "friend@gmail.com"
 }
 ###update a user by its _id
 PUT http://localhost:3001/api/users/62fd795706272aa5b79a12ae
@@ -43,15 +43,42 @@ Content-Type: application/json
 {
   "thoughtText": "Here's another cool thought...",
   "username": "lernantino",
-  "userId": "62fd80b11d68443cd37f8845"
+  "userId": "62fda98b71f8b81e7ad44c10"
 }
 
-###
+### get thought by its id
+GET http://localhost:3001/api/thoughts/62fd81766ad18629af24c2ec
 
-DELETE http://localhost:3001/api/students/
+### delete thought by the id
+
+DELETE http://localhost:3001/api/thoughts/62fd82c995c0f98e8782f603
+
+
+### update a thought by its id
+PUT http://localhost:3001/api/thoughts/62fd81766ad18629af24c2ec
 Content-Type: application/json
 
 {
-  "group_id": "62fab3ae7195131226d24df2",
-  "student_id": "62fab3e07195131226d24df5"
+  "thoughtText": "Wait.. I changed my mind",
+  "username": "lernantino",
+  "userId": "62fd80b11d68443cd37f8845"
 }
+
+
+### create a reaction stored in a single thoughts reactions array field
+
+POST http://localhost:3001/api/thoughts/62fda9c871f8b81e7ad44c12/reactions
+Content-Type: application/json
+
+{
+  "reactionBody": "lmao",
+  "username": "lernantino"
+}
+
+### add a friend to a user
+
+POST http://localhost:3001/api/users/62fdb41160e17f44a8dbed94/friends/62fda98b71f8b81e7ad44c10
+
+### remove a friend from a user
+
+DELETE http://localhost:3001/api/users/62fdb41160e17f44a8dbed94/friends/62fda98b71f8b81e7ad44c10

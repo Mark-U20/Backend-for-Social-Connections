@@ -1,5 +1,8 @@
 const { ObjectId } = require('mongoose').Types;
-const { Reaction, Thought, User } = require('../models');
+const {Thought, User } = require('../models');
+
+
+
 
 
 module.exports = {
@@ -17,7 +20,10 @@ module.exports = {
         if(!user){
             return res.status(404).send('No user found by this id');
         }
-        res.json(user);
+        res.json({
+            user,
+            friendCount: user.friendCount,
+        });
     },
 
     async createNewUser(req, res){
@@ -68,11 +74,14 @@ module.exports = {
     } ,
 
     async getThoughtById(req, res){
-        const thought = await Thought.findById({_id: req.params.thoughtId});
+        const thought = await Thought.findById({_id: req.params.id});
         if(!thought){
             return res.status(404).send('Cannot find thought by this id');
         }
-        res.json(thought);
+        res.json({
+            thought,
+            reactionCount: thought.reactionCount
+        });
     } ,
 
     //to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
@@ -91,7 +100,7 @@ module.exports = {
     } ,
 
     async updateThought(req, res){
-        const thought = await Thought.findByIdAndUpdate({_id: req.params.thoughtId}, req.body, {new: true});
+        const thought = await Thought.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true});
         if(!thought){
             return res.status(404).send('Cannot update thought because the thought does not exist');
         }
@@ -99,19 +108,21 @@ module.exports = {
     } ,
 
     async removeThought(req, res){
-        const thought = await Thought.findByIdAndRemove({_id: req.params.thoughtId});
+        const thought = await Thought.findByIdAndRemove({_id: req.params.id});
         if(!thought){
             return res.status(404).send('Cannot delete thought because the thought does not exist');
         }
         res.json(thought);
     } ,
     async addReaction(req, res){
-        const thought = await Thought.findById({_id: req.params.thoughtId});
+        const thought = await Thought.findById({_id: req.params.id});
         if(!thought){
             return res.status(404).send('Cannot add reaction because the thought does not exist');
         }
+        console.log(req.body);
         thought.reactions.push(req.body);
         await thought.save();
+        console.log(`AOUJSDHKLASJDHKAJSHDKLASDHAKLSHDAKLSDHAKSLDJH`)
         res.json(thought);
     } ,
     async removeReaction(req, res){
@@ -124,7 +135,37 @@ module.exports = {
         res.json(thought);
     } ,
 
+    async addFriend(req, res){
+        const user = await User.findById(req.params.userId);
+        const friend = await User.findById(req.params.friendId);
+
+        if(!user || !friend){
+            return res.status(404).send('Cannot add friend because one of the users does not exist');
+        }
+        user.friends.push(req.params.friendId);
+        friend.friends.push(req.params.userId);
+        await user.save();
+        await friend.save();
+        res.json({user, friend});
+    } ,
+
+    async removeFriend(req, res){
+        const user = await User.findById(req.params.userId);
+        const friend = await User.findById(req.params.friendId);
+
+        if(!user || !friend){
+            return res.status(404).send('Cannot remove friend because one of the users does not exist');
+        }
+        user.friends.pull(req.params.friendId);
+        friend.friends.pull(req.params.userId);
+        await user.save();
+        await friend.save();
+        res.json({user, friend});
+
     }
+
+
+}
 
 
 

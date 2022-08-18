@@ -34,15 +34,24 @@ router.route('/users/:userId/friends/:friendId').post(addFriend).delete(removeFr
 //thought routes
 
 router.route('/thoughts').get(getThoughts)
-.get(getThoughtById)
 .post(addThought)
 .put(updateThought)
-.delete(removeThought);
+
+//thought by id routes
+router.route('/thoughts/:id').get(getThoughtById)
+.delete(removeThought)
+.put(updateThought);
+
 
 //reaction routes
 
-router.route('/thoughts/:thoughtId/reactions').post(addReaction)
+router.route('/thoughts/:id/reactions').post(addReaction)
 .delete(removeReaction);
+
+
+router.route('/users/:userId/friends/:friendId').post(addFriend).delete(removeFriend);
+
+
 
 module.exports = router;
 
