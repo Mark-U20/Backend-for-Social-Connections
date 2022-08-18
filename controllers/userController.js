@@ -78,12 +78,14 @@ module.exports = {
     //to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
 
     async addThought(req, res){
+        console.log(`adding thought to user ${req.body.userId}`);
         const thought = await Thought.create(req.body);
-        const user = await User.findById({_id: req.params.userId});
+        const user = await User.findById({_id: req.body.userId});
         if(!user){
             return res.status(404).send('Cannot add thought because the user does not exist');
         }
-        user.thoughts.push(thought._id);
+        console.log(`adding thought ${thought._id} to user ${user._id}`);
+        user.thoughts.push(thought);
         await user.save();
         res.json(thought);
     } ,

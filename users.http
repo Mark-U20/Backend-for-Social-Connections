@@ -35,15 +35,15 @@ DELETE http://localhost:3001/api/users/62fd795706272aa5b79a12ae
 
 GET http://localhost:3001/api/thoughts
 
-### Add student to a group
+### Create a thought from user
 
-POST https://mongoose-playground-testing.herokuapp.com/api/students/
+POST http://localhost:3001/api/thoughts
 Content-Type: application/json
 
 {
-  "group_id": "62fd0d7f8e7b2c4c319bba4c",
-  "first": "test",
-  "last": "test123123"
+  "thoughtText": "Here's another cool thought...",
+  "username": "lernantino",
+  "userId": "62fd80b11d68443cd37f8845"
 }
 
 ###
