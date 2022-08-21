@@ -1,7 +1,7 @@
 
 # Social Connections Backend
 
-This program servers as a backend for a social media application where users can create accounts, add friends, post thoughts, and react to others' posts.
+This program serves as a backend for a social media application where users can create accounts, add friends, post thoughts, and react to others' posts.
 
 ## Description
 
